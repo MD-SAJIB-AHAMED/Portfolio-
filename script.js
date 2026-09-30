@@ -61,6 +61,43 @@ const observer = new IntersectionObserver((entries, obs) => {
 
 $$(".reveal").forEach(el => observer.observe(el));
 
+
+/* Interactive terminal card */
+const codeCard = $("#codeCard");
+const terminalModal = $("#terminalModal");
+const terminalClose = $("#terminalClose");
+const terminalBackdrop = $("#terminalBackdrop");
+const terminalOutput = $("#terminalOutput");
+
+function openTerminal(){
+  terminalModal.classList.add("show");
+  terminalModal.setAttribute("aria-hidden","false");
+  document.body.style.overflow = "hidden";
+}
+
+function closeTerminal(){
+  terminalModal.classList.remove("show");
+  terminalModal.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
+}
+
+codeCard.addEventListener("click", openTerminal);
+terminalClose.addEventListener("click", closeTerminal);
+terminalBackdrop.addEventListener("click", closeTerminal);
+
+$$('[data-terminal-action]').forEach(button => {
+  button.addEventListener("click", () => {
+    const action = button.dataset.terminalAction;
+    const target = action === "projects" ? "#projects" : action === "about" ? "#about" : "#contact";
+    const label = action === "projects" ? "cd projects" : action === "about" ? "cat about.txt" : "open contact";
+    terminalOutput.innerHTML = `<p><b>SAJIB@portfolio:~$</b> ${label}</p><p>Opening <span class="terminal-muted">${target}</span>...</p>`;
+    setTimeout(() => {
+      closeTerminal();
+      document.querySelector(target)?.scrollIntoView({behavior:"smooth", block:"start"});
+    }, 450);
+  });
+});
+
 /* Project data */
 const projectData = {
   cgpa:{
@@ -141,7 +178,10 @@ $("#modalClose").addEventListener("click", closeModal);
 $("#modalBackdrop").addEventListener("click", closeModal);
 
 document.addEventListener("keydown", e => {
-  if(e.key === "Escape") closeModal();
+  if(e.key === "Escape") {
+    closeModal();
+    closeTerminal();
+  }
 });
 
 /* Contact form
