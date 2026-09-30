@@ -349,6 +349,26 @@ button{
   overflow:hidden;
 }
 
+.code-card{
+  width:100%;
+  text-align:left;
+  cursor:pointer;
+  color:inherit;
+  font:inherit;
+  transition:.25s;
+}
+
+.code-card:hover{
+  border-color:var(--blue);
+  box-shadow:0 0 35px rgba(0,157,255,.15), inset 0 0 30px rgba(0,120,255,.04);
+  transform:translateY(-3px);
+}
+
+.code-card:focus-visible{
+  outline:2px solid var(--blue);
+  outline-offset:4px;
+}
+
 .code-card:before,
 .code-card:after{
   content:"";
@@ -367,6 +387,27 @@ button{
   right:-1px;bottom:-1px;border-width:0 1px 1px 0;
 }
 
+.terminal-bar{
+  display:flex;
+  align-items:center;
+  gap:5px;
+  margin-bottom:14px;
+  opacity:.75;
+}
+
+.terminal-bar span{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#47708f;
+}
+
+.terminal-bar small{
+  margin-left:5px;
+  color:#708aa3;
+  font:10px monospace;
+}
+
 .code-card code{
   color:#13b5ff;
   font-size:14px;
@@ -376,6 +417,16 @@ button{
 
 .code-card code b{
   animation:blink 1s infinite;
+}
+
+.terminal-hint{
+  position:absolute;
+  right:16px;
+  bottom:12px;
+  color:#52718d;
+  font:8px monospace;
+  letter-spacing:1px;
+  opacity:.75;
 }
 
 @keyframes blink{50%{opacity:0}}
@@ -927,6 +978,60 @@ button{
   color:var(--blue);
   font-size:9px;
   letter-spacing:2px;
+}
+
+.terminal-modal-box{
+  border-color:rgba(0,168,255,.42);
+}
+
+.terminal-title{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:#dff5ff;
+  font:700 13px monospace;
+  margin-bottom:18px;
+}
+
+.terminal-prompt{
+  color:var(--blue);
+}
+
+.terminal-output{
+  min-height:125px;
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#010b16;
+  color:#8ec9e8;
+  font:11px/1.8 monospace;
+  box-shadow:inset 0 0 25px rgba(0,120,255,.04);
+}
+
+.terminal-output b{color:#18b4ff}
+.terminal-muted{color:#55748d}
+
+.terminal-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+
+.terminal-actions button{
+  flex:1;
+  min-width:100px;
+  border:1px solid var(--line2);
+  border-radius:7px;
+  padding:9px 12px;
+  color:#dff5ff;
+  background:rgba(0,130,255,.06);
+  font:600 10px Inter,sans-serif;
+}
+
+.terminal-actions button:hover{
+  border-color:var(--blue);
+  background:rgba(0,130,255,.13);
 }
 
 .modal-box h2{
